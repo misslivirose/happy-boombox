@@ -34,7 +34,7 @@
         <text id = "songs">Fetching songs...</text> 
     </div>
     <br>
-    <text>Default music provided by BenSound (bensound.org)</text>
+    <text id = "attributions">Default music provided by BenSound (bensound.org)</text>
     <script> 
         function main() {
             var initialized = false;
@@ -42,6 +42,7 @@
                 message = JSON.parse(message);
                 if (message.type === "updateSongList" && !initialized) {
                     initialized = true;
+                    $("#attributions").text(message.attribution);
                     document.getElementById("volume").value = parseInt(message.volume * 10);
                     $("#controls").css('visibility', 'visible');
 

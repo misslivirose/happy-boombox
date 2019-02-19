@@ -12,6 +12,7 @@
     var boomboxID;
     var songList;
     var boomboxUserData;
+    var attribution;
 
     var tablet;
     var controllerApp = Script.resolvePath("app/boomBoxController.html");
@@ -97,6 +98,7 @@
             tablet.emitScriptEvent(JSON.stringify({
                 'type' : 'updateSongList',
                 'songList': songList,
+                'attribution' : attribution,
                 'volume' : getVolume()
             }));
             Script.setTimeout(emitData, RETRY_SEND_INFO);
@@ -120,6 +122,7 @@
         }
         boomboxUserData = Entities.getEntityProperties(boomboxID, 'userData').userData;
         songList = JSON.parse(boomboxUserData).music;
+        attribution = JSON.parse(boomboxUserData).attribution;
         emitData();
     }
 
@@ -133,6 +136,7 @@
     this.preload = function(entityID) {
         tablet = Tablet.getTablet("com.highfidelity.interface.tablet.system");
         boomboxID = Entities.getEntityProperties(entityID, 'parentID').parentID;
+
     };
     /**
      * clickDownOnEntity() 
